@@ -11,6 +11,7 @@ import { AnalyticsComponent } from './Admin/components/analytics/analytics.compo
 import { AddResponceComponent } from './Admin/components/add-responce/add-responce.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'Client/test', pathMatch: 'full' },
     {path:"Client", component:ClientSpaceComponent,
         children: [
             {
