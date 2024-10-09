@@ -1,0 +1,18 @@
+<div class="form-container">
+  <form [formGroup]="rep" class="form-group" (ngSubmit)="uploadReponse()">
+  <label for="">La Reponse Vrai</label>
+    <input type="file" name="image" formControlName="rep1" class="form-control"/>
+    <label for="">La 1er Reponse fausse</label>
+  <input type="file" name="image" formControlName="rep2" class="form-control"/>
+  <label for="">La 2eme Reponse fausse</label>
+  <input type="file" name="image" formControlName="rep3" class="form-control"/>
+  <label for="">La 3eme Reponse fausse</label>
+  <input type="file" name="image" formControlName="rep4" class="form-control"/>
+  <label for="">La 4eme Reponse fausse</label>
+  <input type="file" name="image" formControlName="rep5" class="form-control"/>
+  <label for="">La 5eme Reponse fausse</label>
+  <input type="file" name="image" formControlName="rep6" class="form-control"/>
+
+  <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!rep.valid">Upload</button>
+</form>
+</div>

@@ -1,0 +1,70 @@
+<main>
+<!-- Button trigger modal -->
+<button class="btn btn-success" (click)="openInfo()"><mat-icon>add</mat-icon></button>
+<ng-template #addQuestion>
+    <h2 style="text-align:center">Add Question</h2>
+    <div class="form-container">
+        <form [formGroup]="file" class="form-group" (ngSubmit)="upload()">
+          <div class="bg bg-danger"  *ngIf="des">
+            <p>Description is required</p>
+          </div>
+        <label for="">Description</label>
+        <input type="text" placeholder="Enter the name of the question" class="form-control" formControlName="description" />
+        <div class="bg bg-danger" *ngIf="ima" >
+          <p>Image is required</p>
+        </div>
+        <input type="file" name="image" formControlName="image" class="form-control" />
+        <button type="submit" class="btn btn-primary btn-block mt-4" [disabled]="!file.valid">Upload</button>
+    </form>
+    </div>
+
+</ng-template>
+
+    <div class="container mt-5">
+        <h2>Les Questions du Test</h2> 
+        
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>#</th>
+                
+              <th>Question</th>
+              <th>Image Question</th>
+              <th>Image Description</th>
+            </tr>
+          </thead>
+          <tbody>
+           <tr *ngFor="let i of questions">
+            <td></td>
+            <td>{{i.name}}</td>
+            <td><div style="height: 10%; width: 10%;"> <img [src]=i.imagePath class="custom-image"></div></td>
+            <td>{{i.desc}}</td>
+            <td ><button class="btn btn-primary" (click)="open(i.id)" *ngIf=!i.hasResponce> Reponses</button>
+                <button class="btn btn-secondary" *ngIf=i.hasResponce  (click)="openI(i.id)"><mat-icon>info</mat-icon></button>
+            
+            <ng-template #infoQuestion>
+              <div class="modal-header">
+                <h2 class="modal-title text-center">Description du Question</h2>
+                <button type="button" class="close" aria-label="Close" (click)="onClose()">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              
+              <div class="modal-body">
+                <div class="container">
+                  <div *ngFor="let i of AAOOQ" class="d-flex align-items-center mb-4">
+                    <h3 class="text-secondary me-3">Reponse n°</h3>
+                    <img  [src]="i.imagePath" class="img-fluid rounded shadow-sm" alt="Reponse Image" style="max-width: 200px;">
+                  </div>
+                </div>
+              </div>
+              
+            </ng-template>
+            
+
+           </tr>
+          </tbody>
+        </table>
+
+      </div>
+</main>

@@ -1,0 +1,238 @@
+
+<div  class="div1" #content >
+  <div *ngIf="show1" class="text-center my-4">
+    <h4 class="fw-bold">Test QI International</h4>
+    <p class="mt-3">
+      Bienvenue sur le test de QI international. Un test de QI est une évaluation psychologique qui mesure une gamme
+      de capacités cognitives et fournit un score destiné à servir de mesure des capacités intellectuelles et du potentiel
+      d’un individu. Avant de commencer le test, assurez-vous d’être dans un espace 
+      dans lequel vous pouvez vous concentrer. Nous évaluerons à travers 30 questions vos capacités
+      d’apprendre, de comprendre, de former des concepts, de traiter des informations, 
+      d’appliquer la logique et la raison. Votre résultat vous indiquera votre QI ainsi
+      que votre position par rapport à la population à travers plusieurs statistiques.*
+    </p>
+  </div>
+  
+  <div class="d-flex justify-content-center mt-3" *ngIf="show2">
+    <button type="button" class="btn btn-primary" (click)="loadComponent()">
+      <span *ngIf="show1">Tester</span>
+      <div *ngIf="!show1" class="d-inline-flex align-items-center">
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span class="ms-2">Loading...</span>
+      </div>
+    </button>
+  </div>
+  
+      <div *ngIf=show3>
+            <div style="border: 1px grey solid;">
+
+              <div class="card" [hidden]="testf">
+                <div class="card-content ">
+                  <div class="row">
+                  <h2 class="card-description col-md" style="text-align:left;">{{currentItem.desc}}</h2>
+                  <h2 class="card-description col-md" style="text-align: right;">{{ minutes }} min {{ seconds}} sec</h2>
+                  
+                </div>
+                <div class="bar-container">
+                  <div class="bar" [style.width.%]="fillLevel"></div>
+                </div>
+                
+                </div>
+
+                <div class="row" *ngIf=dn>
+                  <div class="col-md">
+                      <h1><img [src]=currentItem.imagePath alt="" width="100%" height="100%"></h1>
+                  </div>
+                  <div class="col-md">
+                    <div class="row justify-content-center">
+                      <ng-container *ngFor="let i of currentA; let index = index">
+                        <!-- Open a new row for every pair of images (two images per row) -->
+                        <div class="col-6 d-flex justify-content-center mb-4 ">
+                          <img [src]="i.imagePath" class="custom-image img-fluid" width="80%" height="80%" (click)="fillBar(i.status)">
+                        </div>
+                    
+                        <!-- If it's the second image in the row, close the row -->
+                        <div *ngIf="(index + 1) % 2 === 0"></div>
+                      </ng-container>
+                    </div>
+                    
+                  </div>
+
+                </div>
+                <button (click)="fillBar(null)" *ngIf=dn  class="col-6" style="margin-left: 35%;margin-bottom: 2%;margin-top: 2%;">Passer cette  question</button>
+
+                
+              <div>
+                <!-- checkout.component.html -->
+
+<div class="checkout-container container" [hidden]="!de">
+  <!-- Stepper navigation (Bootstrap-based) -->
+  <div class="stepper">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" (click)="previous()" >Information Personnelle</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab"(click)="next()">Information du Payement</a>
+      </li>
+    </ul>
+
+    <!-- Step Content -->
+    <div class="tab-content">
+      <div [hidden]="step1" >
+        <h3>Information Personnelle</h3>
+        <form [formGroup]="credentials" class="form-container">
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Entrer votre Nom" formControlName="nom" required>
+            
+          </div>
+        
+          <div class="mb-3">
+            <label for="address" class="form-label">Email</label>
+            <input type="text" class="form-control" id="address" placeholder="Entrer votre Prenom" formControlName="email" required>
+
+          </div>
+        
+          <div class="mb-3">
+            <label for="email" class="form-label">Genre</label>
+            <input type="email" class="form-control" id="email" placeholder="Entrer votre Email" formControlName="genre" required>
+            
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Année de Naissance</label>
+            <input type="date" class="form-control" id="email" placeholder="Entrer votre Email" formControlName="annee" required>
+            
+          </div>
+          
+        
+          <button type="button" class="btn btn-primary" (click)="next()">Next</button>
+        </form>
+        
+
+      </div>
+      <!--<div class="payment-options-container" *ngIf="payement">
+        <div class="payment-option">
+          <img src="visa-logo.png" alt="Visa Logo" class="payment-logo">
+          <span class="payment-text">Carte Bancaire</span>
+          <span class="payment-fee">+ 0.033 TND</span>
+        </div>
+        
+        <div class="payment-option">
+          <img src="assets/edinar-logo.png" alt="E-Dinar Logo" class="payment-logo">
+          <span class="payment-text">Carte E-Dinar</span>
+          <span class="payment-fee">+ 0.033 TND</span>
+        </div>
+        
+        <div class="payment-option">
+          <img src="assets/flouci-logo.png" alt="Flouci Logo" class="payment-logo">
+          <span class="payment-text">Flouci</span>
+          <span class="payment-fee">+ 0.033 TND</span>
+        </div>
+      
+        <div class="separator">
+          <hr>
+          <span class="or-text">OU</span>
+          <hr>
+        </div>
+      
+        <div class="payment-option special-option">
+          <img src="assets/konnect-logo.png" alt="Konnect Logo" class="payment-logo">
+          <span class="payment-text">Payer avec Konnect</span>
+          <span class="payment-fee">Gratuit</span>
+        </div>
+      </div>-->
+      
+
+      <div class="container d-flex justify-content-center align-items-center vh-100" *ngIf="resultat">
+        <div class="congrats-container bg-white p-4 rounded shadow text-center">
+          <h2 class="mb-3 text-success">Félicitations! Votre QI est {{scoreT}}</h2>
+          <h1 class="display-4 text-danger">QI {{scoreT}}</h1>
+          <h3 class="mb-4 text-warning">Classification: QI - {{class}}!</h3>
+          <h4 class="text-muted">ID de votre Test (à mémoriser): <qrcode [qrdata]="idTest" [allowEmptyString]="true"></qrcode></h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+              </div>
+              
+       </div>
+  </div>
+ 
+  
+ </div>
+ </div>
+  
+ <div class="container my-4">
+  <div class="row">
+      
+      <div class="col-md-2" *ngFor="let i of Best10Tests"> <!-- Adjusted column size -->
+          <h5 class="text-center text-primary"></h5>
+          <div class="card p-2 shadow-sm">
+              <h6 class="elementor-heading-title elementor-size-default text-center">{{i.nom}}</h6>
+              <img  height="10%" src="tunflag.png"/>
+              <h6 class="elementor-heading-title elementor-size-default text-center">IQ : {{i.iqLevel}}</h6>
+
+          </div>
+      </div>
+  </div>
+</div>
+ 
+  
+ <div class="container my-4">
+  <div class="row">
+      <div class="col-md-8 mb-4"> <!-- Increased column size -->
+          <div class="card shadow-sm">
+              <img src="IQ_curve.png" class="card-img-top" alt="IQ Curve" />
+          </div>
+      </div>
+      <div class="col-md-4"> <!-- Adjusted column size -->
+          <h5 class="text-center text-primary">Répartition de la population mondiale</h5>
+          <div class="card p-3 shadow-sm">
+              <h6 class="elementor-heading-title elementor-size-default">Classification du QI</h6>
+              <p><strong>130-144 :</strong> Surdoué</p>
+              <p><strong>120-129 :</strong> Supérieur</p>
+              <p><strong>110-119 :</strong> Moyen élevé</p>
+              <p><strong>90-109 :</strong> Moyenne</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+<style>
+  .container {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+  }
+  
+  .card {
+      border: none;
+      border-radius: 10px;
+  }
+
+  .text-primary {
+      color: #007bff !important;
+  }
+
+  .card-img-top {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      width: 100%;
+      height: auto;
+  }
+
+  h6 {
+      font-weight: bold;
+      margin-bottom: 1rem;
+  }
+
+  p {
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+  }
+</style>
+
+

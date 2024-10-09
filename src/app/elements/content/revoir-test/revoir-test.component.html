@@ -1,0 +1,57 @@
+<main id="content" class="site-main post-114 page type-page status-publish hentry">
+
+    <header class="page-header text-center mb-4">
+      <h1 class="entry-title">Revoir mon résultat</h1>	
+    </header>
+  
+    <div class="page-content container">
+      <div class="wpforms-container wpforms-container-full mb-4" id="wpforms-126">
+        <form  [formGroup]="result" id="wpforms-form-126" class="wpforms-validate wpforms-form wpforms-ajax-form" method="post" action="/revoir-test/" novalidate="novalidate">
+          <noscript class="wpforms-error-noscript">Veuillez activer JavaScript dans votre navigateur pour remplir ce formulaire.</noscript>
+          
+          <div class="wpforms-field-container">
+            <div id="wpforms-126-field_4-container" class="wpforms-field wpforms-field-text mb-3" data-field-id="4">
+              <label class="wpforms-field-label" for="wpforms-126-field_4">Veuillez saisir l'ID de votre Test QI: 
+                <span class="wpforms-required-label">*</span>
+              </label>
+              <input type="text" id="wpforms-126-field_4" class="form-control wpforms-field-medium wpforms-field-required" name="wpforms[fields][4]" required="" formControlName="idTest">
+            </div>
+            <div id="wpforms-126-field_3-container" class="wpforms-field wpforms-field-email mb-3" data-field-id="3">
+              <label class="wpforms-field-label" for="wpforms-126-field_3">Votre E-mail 
+                <span class="wpforms-required-label">*</span>
+              </label>
+              <input type="email" id="wpforms-126-field_3" class="form-control wpforms-field-medium wpforms-field-required" name="wpforms[fields][3]" spellcheck="false" required="" formControlName="email">
+            </div>
+          </div><!-- .wpforms-field-container -->
+  
+          <div class="wpforms-recaptcha-container mb-3">
+            <div class="g-recaptcha" data-sitekey="6Lc9-YAfAAAAAAkCjFFSa6XkwcRwWViR-u2UtA8j"></div>
+          </div>
+  
+          <div class="wpforms-submit-container text-center">
+            <input type="hidden" name="wpforms[id]" value="126">
+            <input type="hidden" name="page_title" value="Revoir mon résultat">
+            <input type="hidden" name="page_url" value="https://test-qi.tn/revoir-test/">
+            <button type="submit" name="wpforms[submit]" id="wpforms-submit-126" class="btn btn-primary" data-alt-text="Envoie en cours..." data-submit-text="Envoyez-moi le lien de mon résultat" aria-live="assertive" (click)="generateResult()"  [disabled]="!result.valid">Envoyez-moi le lien de mon résultat</button>
+            <img decoding="async" src="https://test-qi.tn/wp-content/plugins/wpforms-lite/assets/images/submit-spin.svg" class="wpforms-submit-spinner" style="display: none;" width="26" height="26" alt="Chargement en cours">
+          </div>
+        </form>
+      </div> <!-- .wpforms-container -->
+      
+        
+      <div class="overlay" *ngIf="showDialog">
+        <div class="spinner"></div>
+      </div>
+      
+      <!-- Show the dialog when showDialog is true (after delay) -->
+      <div class="dialog" *ngIf="showDialog">
+        <h2>Centered Dialog</h2>
+        <p>This dialog appears after a delay.</p>
+      </div>
+         
+      <h5 class="mt-4">Le but du test de QI</h5>
+      <p>Le test de QI peut être utilisé pour de nombreux motifs. Il permet de situer son niveau de capacité d’apprendre, de comprendre, de former des concepts, de traiter les informations, d’appliquer la logique et la raison, par rapport à la population. Il est indicatif et peut représenter une influence sur des caractères non-communs que l’on peut rencontrer en société, qu’ils soient relationnels tels que l’isolement, le rejet ou l’écartement, ou intellectuels tels que des facilités ou des difficultés rencontrés dans des activités intellectuelles. D’une autre manière, il peut aussi expliquer des réussites acquises de manières plus faciles que d’autres par des individus.</p>
+    </div> <!-- .page-content -->
+  
+  </main>
+  

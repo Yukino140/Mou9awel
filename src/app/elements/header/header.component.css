@@ -1,0 +1,27 @@
+.c{
+    background-color: rgb(59, 74, 103);
+    width: 100%;
+}
+header {
+    background-color: rgb(59, 74, 103); /* Dark background */
+    color: white; /* White text */
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #ffc107; /* Yellow color on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .nav {
+      flex-direction: column;
+    }
+  
+    .col-md-6 {
+      justify-content: flex-start;
+    }
+  }
