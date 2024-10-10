@@ -191,40 +191,38 @@ scoreT:number=0
       // Si le formulaire est valide, procéder à l'étape suivante
       console.log('Form is valid:', this.credentials.value);
       this.step1=true
-    this.step2=false
-    const baseIQL = 68;
-console.log(this.answers);
-console.log(this.totalTimeLeft);
+      this.step2=false
+      const baseIQL = 68;
+      console.log(this.answers);
+      console.log(this.totalTimeLeft);
 
-let point = 0;
-this.scoreT = 0; // Initialize scoreT if not already done
+      let point = 0;
+      this.scoreT = 0; 
 
-// Calculate score based on answers
-this.answers.forEach((a: any) => {
-  if (a.qs === true) { // Use strict equality for comparison
-    this.scoreT += 2; // Increment score by 2
-    point += 2; // Increment point by 2
-  }
-});
+        this.answers.forEach((a: any) => {
+          if (a.qs === true) { 
+            this.scoreT += 2;     
+            point += 2; 
+          }
+        });
 
-// Add base IQL score if needed
-this.scoreT += baseIQL;
+    this.scoreT += baseIQL;
 
-// Assuming 's' is defined somewhere in your code, it should be passed or available
-/*if (s === '6-14' || s === '60-90') {
-  this.scoreT += 10;
-}*/
+    // Assuming 's' is defined somewhere in your code, it should be passed or available
+    /*if (s === '6-14' || s === '60-90') {
+      this.scoreT += 10;
+    }*/
 
 // Calculate additional points based on time taken
-const seconds = 1200 - this.totalTimeLeft; // Assuming totalTimeLeft is in seconds
-let secondPoints = 0;
+    const seconds = 1200 - this.totalTimeLeft; // Assuming totalTimeLeft is in seconds
+    let secondPoints = 0;
 
-if (seconds > 15) {
-  secondPoints = Math.round(seconds / 15); // Points for time taken
-}
+    if (seconds > 15) {
+      secondPoints = Math.round(seconds / 15); // Points for time taken
+    }
 
-const maxP = this.answers.length * 2 - 2; // Maximum possible points (assuming 2 points per correct answer)
-const allTestCorrect = this.answers.length * 2; // Total points possible
+    const maxP = this.answers.length * 2 - 2; // Maximum possible points (assuming 2 points per correct answer)
+    const allTestCorrect = this.answers.length * 2; // Total points possible
 
 // Add time-based points if conditions are met
 if (point >= maxP) {
@@ -232,9 +230,9 @@ if (point >= maxP) {
 }
 
 // Add bonus points if all answers are correct
-if (point >= allTestCorrect) {
-  this.scoreT += 20;
-}
+  if (point >= allTestCorrect) {
+    this.scoreT += 20;
+  }
 
     console.log(this.scoreT)
     if(this.scoreT<90){
@@ -249,14 +247,9 @@ if (point >= allTestCorrect) {
       this.class="Surdoué"
     }
     //this.resultat=true
-    this.resultat=true
+    this.payement=true
     this.idTest=this.generateRandomString(10)
-    this.t=new Test(this.idTest,this.credentials.get('nom')?.value,this.credentials.get('email')?.value,this.credentials.get('genre')?.value,this.credentials.get('annee')?.value,this.scoreT)
-    this.test1.newTest(this.t).subscribe(()=>{
-      console.log("test Registered")
-      console.log("Mail sent")
-
-    })
+    
   
     } else {
       // Si non valide, afficher un message ou empêcher l'étape suivante
@@ -333,10 +326,45 @@ num:any=[]
         this.Best10Tests=res
     })
   }
-
+verif:boolean=false
+idPayement!:string
   initPayement(){
-    this.paymentService.initiatePayment(15,"TND",25413).subscribe(res=>{
-      console.log("Success")
+    
+    this.paymentService.initPayment(10000,"TND","6706b08e0d21eb0194727cb3").subscribe({
+      next: result => {
+        // Handle successful result
+        console.log('Payment succeeded:', result);
+        //window.location.href = result.payUrl
+        this.idPayement=result.paymentRef
+        window.open(result.payUrl, '_blank', 'width=800,height=600,toolbar=no,location=no,status=no,menubar=no,scrollbars=yes');
+        this.verif=true
+      },
+      error: error => {
+        // Handle error
+        console.error('Payment failed:', error);
+        
+      }
+    });
+  }
+
+  verifyPayement(){
+    this.paymentService.verifyPayment(this.idPayement).subscribe(res=>{
+      if(res.payment.transactions[0].status=="success"){
+        this.payement=false
+        this.resultat=true
+        this.t=new Test(this.idTest,this.credentials.get('nom')?.value,this.credentials.get('email')?.value,this.credentials.get('genre')?.value,this.credentials.get('annee')?.value,this.scoreT)
+        this.test1.newTest(this.t).subscribe(()=>{
+          console.log("test Registered")
+          console.log("Mail sent")
+
+        })
+      }else if(res.payment.transactions[0].status!="success"){
+        alert("your payement failed try again")
+        this.verif=false
+      }else{
+        alert("Paiement toujours en attente")
+      }
+    
     })
   }
 }

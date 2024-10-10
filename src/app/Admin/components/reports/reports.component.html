@@ -40,7 +40,9 @@
             <td><div style="height: 10%; width: 10%;"> <img [src]=i.imagePath class="custom-image"></div></td>
             <td>{{i.desc}}</td>
             <td ><button class="btn btn-primary" (click)="open(i.id)" *ngIf=!i.hasResponce> Reponses</button>
-                <button class="btn btn-secondary" *ngIf=i.hasResponce  (click)="openI(i.id)"><mat-icon>info</mat-icon></button>
+                <button class="btn btn-secondary" *ngIf=i.hasResponce  (click)="openI(i.id)"><mat-icon>info</mat-icon></button>&nbsp;
+                <button class="btn btn-danger"   (click)="delete(i.id)"><mat-icon>delete</mat-icon></button>
+
             
             <ng-template #infoQuestion>
               <div class="modal-header">
@@ -58,6 +60,17 @@
                   </div>
                 </div>
               </div>
+              
+            </ng-template>
+            <ng-template #deleteQuestion>
+              <div class="modal-header">
+                <h2 class="modal-title text-center">Est ce que Vous etes sur que vous voulez supprimer cette question</h2>
+                <button type="button" class="btn btn-danger"  (click)="deleteQ(idq)">
+                  <span >&times;</span>
+                </button>
+              </div>
+              
+              
               
             </ng-template>
             

@@ -30,6 +30,7 @@ this.router.navigate(['/Dashboard/newReponces',id])
   @ViewChild('addQuestion') addQuestion!: TemplateRef<any>;
   @ViewChild('addReponse') addReponse!: TemplateRef<any>;
   @ViewChild('infoQuestion') infoQuestion!: TemplateRef<any>
+  @ViewChild('deleteQuestion') deleteQuestion!: TemplateRef<any>
 
   constructor(private dialog:MatDialog,private testService:TestServiceService,private router:Router ){}
   ngOnInit(): void {
@@ -103,6 +104,21 @@ ima:boolean=false
         this.AAOOQ=res
       })
      
+    }
+    idq!:number
+    delete(id:number){
+      this.idq=id
+      this.dialog.open(this.deleteQuestion)
+      this.testService.getAllResponscesofOneQuestion(id).subscribe((res)=>{
+        this.AAOOQ=res
+      })
+     
+    }
+    deleteQ(id:number){
+      this.testService.deleteQuestion(id).subscribe(response=>{
+        console.log(response)
+        this.router.navigate(['/reports'])
+      })
     }
 
 

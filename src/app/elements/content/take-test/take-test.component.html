@@ -59,7 +59,7 @@
                   </div>
 
                 </div>
-               <!-- <button (click)="fillBar(null)" *ngIf=dn  class="col-6" style="margin-left: 35%;margin-bottom: 2%;margin-top: 2%;">Passer cette  question</button>-->
+                <!--<button (click)="fillBar(null)" *ngIf=dn  class="col-6" style="margin-left: 35%;margin-bottom: 2%;margin-top: 2%;">Passer cette  question</button>-->
 
                 
               <div>
@@ -111,37 +111,12 @@
         
 
       </div>
-      <!--<div class="payment-options-container" *ngIf="payement">
-        <div class="payment-option">
-          <img src="visa-logo.png" alt="Visa Logo" class="payment-logo">
-          <span class="payment-text">Carte Bancaire</span>
-          <span class="payment-fee">+ 0.033 TND</span>
-        </div>
-        
-        <div class="payment-option">
-          <img src="assets/edinar-logo.png" alt="E-Dinar Logo" class="payment-logo">
-          <span class="payment-text">Carte E-Dinar</span>
-          <span class="payment-fee">+ 0.033 TND</span>
-        </div>
-        
-        <div class="payment-option">
-          <img src="assets/flouci-logo.png" alt="Flouci Logo" class="payment-logo">
-          <span class="payment-text">Flouci</span>
-          <span class="payment-fee">+ 0.033 TND</span>
-        </div>
-      
-        <div class="separator">
-          <hr>
-          <span class="or-text">OU</span>
-          <hr>
-        </div>
-      
-        <div class="payment-option special-option">
-          <img src="assets/konnect-logo.png" alt="Konnect Logo" class="payment-logo">
-          <span class="payment-text">Payer avec Konnect</span>
-          <span class="payment-fee">Gratuit</span>
-        </div>
-      </div>-->
+      <div class="container mt-5 text-center" *ngIf="payement">
+        <p class="lead">if faux payer 3EUR avant d'avoir la résultat de vos tests</p>
+        <a  class="btn btn-primary" (click)="initPayement()" *ngIf="!verif">Payer Maintenant</a>
+        <a  class="btn btn-primary" (click)="verifyPayement()" *ngIf="verif">Voir Resultat</a>
+
+    </div>
       
 
       <div class="container d-flex justify-content-center align-items-center vh-100" *ngIf="resultat">
